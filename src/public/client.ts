@@ -1,3 +1,5 @@
+import { Attendee } from "../browserparty/Attendee";
+
 
 var ws = new WebSocket("wss://" + window.location.host);
 
