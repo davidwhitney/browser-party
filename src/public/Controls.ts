@@ -1,4 +1,4 @@
-import { Location, Move } from "../types";
+import { Location, Move, Entity } from "../types";
 
 export class Controls {
   public target: Entity;
