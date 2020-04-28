@@ -1,12 +1,15 @@
 import { Location } from "../types";
 
-export class Attendee {
+export class Attendee implements Location {
   
   public name: string;
-  public location: Location;
+  public x: number;
+  public y: number;
   
   constructor(name: string, x: number, y: number) {
     this.name = name;
-    this.location = { x, y };
+    this.x = x;
+    this.y = y;
+   // this.location = { x, y };
   }
 }

@@ -9,7 +9,7 @@ export class LocationServerConnection {
      console.log("Web socket connected.");   
     };
 
-    this.ws.onmessage = function (evt) { 
+    this.ws.onmessage = function(evt) { 
      const unpacked = JSON.parse(evt.data);
     };
 
@@ -24,6 +24,6 @@ export class LocationServerConnection {
      // message: messageTextbox.value
     };
 
-    ws.send(JSON.stringify(payload));
+    this.ws.send(JSON.stringify(payload));
   }
 }
