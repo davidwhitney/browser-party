@@ -2,6 +2,7 @@ import { Location, Move } from "../types";
 
 export class Controls {
   public target: Location;
+
   constructor(targetOfControl: Location) {
     this.target = targetOfControl;
   }

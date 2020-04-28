@@ -1,5 +1,6 @@
 import { Attendee } from "../browserparty/Attendee";
 import { LocationServerConnection } from "./LocationServerConnection";
+import { LocationServerConnection } from "./LocationServerConnection";
 import { Move } from "../types";
 
 const world = document.getElementById("world") as HTMLInputElement;
