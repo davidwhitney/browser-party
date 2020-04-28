@@ -1,3 +1,17 @@
+import { Location, Move, Entity } from "../types";
+
+class Message<TMessage> {
+  
+  public sender: string;
+  public body: TEnclosedType;
+  
+  constructor(senderId: string, body: TMessage) {
+    this.sender = senderId;
+    this.body = body
+    
+  }
+}
+
 export class LocationServerConnection {  
   private serverUrl: string;
   private ws: WebSocket;
@@ -16,6 +30,10 @@ export class LocationServerConnection {
     this.ws.onclose = function() {
       console.log("Closed connection");
     };    
+  }
+
+  public sendMovement(entity: Entity, movementDelta: Move) {
+    
   }
 
   public sendMessage() {
