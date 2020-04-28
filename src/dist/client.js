@@ -99,6 +99,18 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar At
 
 /***/ }),
 
+/***/ "./src/public/Controls.ts":
+/*!********************************!*\
+  !*** ./src/public/Controls.ts ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Controls = /** @class */ (function () {\n    function Controls(targetOfControl) {\n        this.target = targetOfControl;\n    }\n    Controls.prototype.processInput = function (keyPressed) {\n        var toMove = function (key) {\n            switch (key) {\n                case \"w\": return { deltaX: 0, deltaY: -1 };\n                case \"a\": return { deltaX: -1, deltaY: 0 };\n                case \"s\": return { deltaX: 0, deltaY: 1 };\n                case \"d\": return { deltaX: 1, deltaY: 0 };\n                default: return { deltaX: 0, deltaY: 0 };\n            }\n        };\n        var key = keyPressed.key.toLowerCase();\n        var movement = toMove(key);\n        this.target.x += movement.deltaX;\n        this.target.y += movement.deltaY;\n    };\n    Controls.prototype.connect = function () {\n        var _this = this;\n        window.addEventListener(\"keypress\", function (args) {\n            _this.processInput(args);\n        }, false);\n    };\n    return Controls;\n}());\nexports.Controls = Controls;\n\n\n//# sourceURL=webpack://lib/./src/public/Controls.ts?");
+
+/***/ }),
+
 /***/ "./src/public/LocationServerConnection.ts":
 /*!************************************************!*\
   !*** ./src/public/LocationServerConnection.ts ***!
@@ -119,7 +131,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Lo
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Attendee_1 = __webpack_require__(/*! ../browserparty/Attendee */ \"./src/browserparty/Attendee.ts\");\nvar LocationServerConnection_1 = __webpack_require__(/*! ./LocationServerConnection */ \"./src/public/LocationServerConnection.ts\");\nvar world = document.getElementById(\"world\");\nvar me = new Attendee_1.Attendee(\"username\", 50, 50);\nvar connection = new LocationServerConnection_1.LocationServerConnection(\"wss://\" + window.location.host);\nvar Controls = /** @class */ (function () {\n    function Controls(targetOfControl) {\n    }\n    Controls.prototype.processInput = function (keyPressed) {\n        var key = keyPressed.key.toLowerCase();\n        var movement = toMove(key);\n        //this.game.world.move(movement);\n    };\n    Controls.prototype.connect = function () {\n        var _this = this;\n        window.addEventListener(\"keypress\", function (args) {\n            _this.processInput(args);\n        }, false);\n    };\n    return Controls;\n}());\nexports.Controls = Controls;\nvar toMove = function (key) {\n    switch (key) {\n        case \"w\": return { deltaX: 0, deltaY: -1 };\n        case \"a\": return { deltaX: -1, deltaY: 0 };\n        case \"s\": return { deltaX: 0, deltaY: 1 };\n        case \"d\": return { deltaX: 1, deltaY: 0 };\n        default: return { deltaX: 0, deltaY: 0 };\n    }\n};\n\n\n//# sourceURL=webpack://lib/./src/public/client.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Attendee_1 = __webpack_require__(/*! ../browserparty/Attendee */ \"./src/browserparty/Attendee.ts\");\nvar LocationServerConnection_1 = __webpack_require__(/*! ./LocationServerConnection */ \"./src/public/LocationServerConnection.ts\");\nvar Controls_1 = __webpack_require__(/*! ./Controls */ \"./src/public/Controls.ts\");\nvar connection = new LocationServerConnection_1.LocationServerConnection(\"wss://\" + window.location.host);\nvar world = document.getElementById(\"world\");\nvar me = new Attendee_1.Attendee(\"username\", 50, 50);\nvar localControls = new Controls_1.Controls(me);\nvar worldContents = [\n    me\n];\nfunction render() {\n    //console.log(\"Rendering\");\n}\nsetInterval(function () { return render(); }, 33);\n\n\n//# sourceURL=webpack://lib/./src/public/client.ts?");
 
 /***/ })
 
