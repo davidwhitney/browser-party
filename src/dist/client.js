@@ -95,7 +95,7 @@ var lib =
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Attendee = /** @class */ (function () {\n    function Attendee(id, x, y) {\n        this.id = id;\n        this.x = x;\n        this.y = y;\n    }\n    Attendee.prototype.move = function (delta) {\n        this.x += (movement.deltaX * this.movementSpeed);\n        this.y += (movement.deltaY * this.movementSpeed);\n    };\n    Attendee.prototype.onMovement = function (callback) {\n        this.onMovementCallback = callback;\n    };\n    return Attendee;\n}());\nexports.Attendee = Attendee;\n\n\n//# sourceURL=webpack://lib/./src/browserparty/Attendee.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Attendee = /** @class */ (function () {\n    function Attendee(id, x, y) {\n        this.id = id;\n        this.x = x;\n        this.y = y;\n        this.movementSpeed = 5;\n    }\n    Attendee.prototype.move = function (movement) {\n        this.x += (movement.deltaX * this.movementSpeed);\n        this.y += (movement.deltaY * this.movementSpeed);\n    };\n    Attendee.prototype.onMovement = function (callback) {\n        this.onMovementCallback = callback;\n    };\n    return Attendee;\n}());\nexports.Attendee = Attendee;\n\n\n//# sourceURL=webpack://lib/./src/browserparty/Attendee.ts?");
 
 /***/ }),
 

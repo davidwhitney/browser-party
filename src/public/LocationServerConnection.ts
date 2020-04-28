@@ -3,7 +3,7 @@ import { Location, Move, Entity } from "../types";
 class Message<TMessage> {
   
   public sender: string;
-  public body: TEnclosedType;
+  public body: TMessage;
   
   constructor(senderId: string, body: TMessage) {
     this.sender = senderId;
