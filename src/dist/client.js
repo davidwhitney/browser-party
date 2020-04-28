@@ -87,6 +87,18 @@ var lib =
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/browserparty/Attendee.ts":
+/*!**************************************!*\
+  !*** ./src/browserparty/Attendee.ts ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Attendee = /** @class */ (function () {\n    function Attendee(name, x, y) {\n        this.name = name;\n        this.location = { x: x, y: y };\n    }\n    return Attendee;\n}());\nexports.Attendee = Attendee;\n\n\n//# sourceURL=webpack://lib/./src/browserparty/Attendee.ts?");
+
+/***/ }),
+
 /***/ "./src/public/client.ts":
 /*!******************************!*\
   !*** ./src/public/client.ts ***!
@@ -95,7 +107,7 @@ var lib =
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar ws = new WebSocket(\"wss://\" + window.location.host);\nvar chatForm = document.getElementById(\"chatui\");\nvar sendMessageButton = document.getElementById(\"send\");\nvar nameTextbox = document.getElementById(\"name\");\nvar messageTextbox = document.getElementById(\"message\");\nvar messagesLog = document.getElementById(\"messages\");\nvar chatUi = [chatForm, sendMessageButton, nameTextbox, messageTextbox, messagesLog];\nws.onopen = function () {\n    for (var _i = 0, chatUi_1 = chatUi; _i < chatUi_1.length; _i++) {\n        var ui = chatUi_1[_i];\n        ui.disabled = false;\n    }\n    messageTextbox.focus();\n};\nws.onmessage = function (evt) {\n    var unpacked = JSON.parse(evt.data);\n    messagesLog.value += unpacked.name + \": \" + unpacked.message + \"\\r\\n\\r\\n\";\n};\nws.onclose = function () {\n    for (var _i = 0, chatUi_2 = chatUi; _i < chatUi_2.length; _i++) {\n        var ui = chatUi_2[_i];\n        ui.disabled = true;\n    }\n};\nvar sendMessage = function (event) {\n    var payload = {\n        name: nameTextbox.value,\n        message: messageTextbox.value\n    };\n    ws.send(JSON.stringify(payload));\n    messageTextbox.value = \"\";\n    messageTextbox.focus();\n    event.preventDefault();\n};\nchatForm.addEventListener(\"submit\", sendMessage);\n\n\n//# sourceURL=webpack://lib/./src/public/client.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Attendee_1 = __webpack_require__(/*! ../browserparty/Attendee */ \"./src/browserparty/Attendee.ts\");\nvar world = document.getElementById(\"world\");\nvar me = new Attendee_1.Attendee(\"username\", 50, 50);\nvar server = \"wss://\" + window.location.host;\nvar LocationServerConnection = /** @class */ (function () {\n    function LocationServerConnection() {\n    }\n    return LocationServerConnection;\n}());\nconnect();\n{\n    this.ws = new WebSocket(websocketServer);\n}\nws.onopen = function () {\n    console.log(\"Web socket connected.\");\n};\nws.onmessage = function (evt) {\n    var unpacked = JSON.parse(evt.data);\n};\nws.onclose = function () {\n    for (var _i = 0, chatUi_1 = chatUi; _i < chatUi_1.length; _i++) {\n        var ui = chatUi_1[_i];\n        ui.disabled = true;\n    }\n};\nvar sendMessage = function (event) {\n    var payload = {\n        name: nameTextbox.value,\n        message: messageTextbox.value\n    };\n    ws.send(JSON.stringify(payload));\n};\n\n\n//# sourceURL=webpack://lib/./src/public/client.ts?");
 
 /***/ })
 

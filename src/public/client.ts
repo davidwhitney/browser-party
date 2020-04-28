@@ -1,32 +1,34 @@
 import { Attendee } from "../browserparty/Attendee";
 
+const world = document.getElementById("world") as HTMLInputElement;
+const me = new Attendee("username", 50, 50);
 
-var ws = new WebSocket("wss://" + window.location.host);
+const server = "wss://" + window.location.host;
 
-const chatForm = document.getElementById("chatui") as HTMLInputElement;
-const sendMessageButton = document.getElementById("send") as HTMLInputElement;
-const nameTextbox = document.getElementById("name") as HTMLInputElement;
-const messageTextbox = document.getElementById("message") as HTMLInputElement;
-const messagesLog = document.getElementById("messages") as HTMLInputElement;
-const chatUi = [ chatForm, sendMessageButton, nameTextbox, messageTextbox, messagesLog ];
 
- ws.onopen = function() {
-   for (let ui of chatUi) {
-     ui.disabled = false;
-   }
-   messageTextbox.focus();
- };
+class LocationServerConnection {  
+  private ws: WebSocket;
+  
+  constructor(websocketServer)
+  }
+  
+  public connect() {
+    this.ws = new WebSocket(websocketServer);
+    this.onopen = function() {
+     console.log("Web socket connected.");   
+    };
 
- ws.onmessage = function (evt) { 
-   const unpacked = JSON.parse(evt.data);
-   messagesLog.value += `${unpacked.name}: ${unpacked.message}\r\n\r\n`;
- };
+    this.onmessage = function (evt) { 
+     const unpacked = JSON.parse(evt.data);
+    };
 
- ws.onclose = function() {
-   for (let ui of chatUi) {
-     ui.disabled = true;
-   }
- };
+    this.onclose = function() {
+    };
+  }
+
+  
+}
+
 
 const sendMessage = (event) => {
   const payload = {
@@ -35,10 +37,4 @@ const sendMessage = (event) => {
   };
   
   ws.send(JSON.stringify(payload));
-  
-  messageTextbox.value = "";
-  messageTextbox.focus();
-  event.preventDefault();
 };
-
-chatForm.addEventListener("submit", sendMessage);

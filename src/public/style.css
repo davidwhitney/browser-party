@@ -63,13 +63,8 @@ li {
   margin-bottom: 5px;
 }
 
-footer {
-  margin-top: 50px;
-  padding-top: 25px;
-  border-top: 1px solid lightgrey;
-}
-
-.message-box {
-  width: 100%;
+.world {
+  width: 80vw;
   height: 80vh;
+  background-color: pink;
 }
