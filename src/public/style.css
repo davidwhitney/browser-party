@@ -63,6 +63,12 @@ li {
   margin-bottom: 5px;
 }
 
+.entity {
+  height: 150px;
+  width: 150px;
+  background-color: red;
+}
+
 .world {
   top: 0;
   left: 0;

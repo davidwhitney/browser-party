@@ -95,7 +95,7 @@ var lib =
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Attendee = /** @class */ (function () {\n    function Attendee(name, x, y) {\n        this.name = name;\n        this.x = x;\n        this.y = y;\n        // this.location = { x, y };\n    }\n    return Attendee;\n}());\nexports.Attendee = Attendee;\n\n\n//# sourceURL=webpack://lib/./src/browserparty/Attendee.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Attendee = /** @class */ (function () {\n    function Attendee(id, x, y) {\n        this.id = id;\n        this.x = x;\n        this.y = y;\n        // this.location = { x, y };\n    }\n    return Attendee;\n}());\nexports.Attendee = Attendee;\n\n\n//# sourceURL=webpack://lib/./src/browserparty/Attendee.ts?");
 
 /***/ }),
 
@@ -131,7 +131,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Lo
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Attendee_1 = __webpack_require__(/*! ../browserparty/Attendee */ \"./src/browserparty/Attendee.ts\");\nvar LocationServerConnection_1 = __webpack_require__(/*! ./LocationServerConnection */ \"./src/public/LocationServerConnection.ts\");\nvar Controls_1 = __webpack_require__(/*! ./Controls */ \"./src/public/Controls.ts\");\nvar connection = new LocationServerConnection_1.LocationServerConnection(\"wss://\" + window.location.host);\nvar world = document.getElementById(\"world\");\nvar me = new Attendee_1.Attendee(\"username\", 50, 50);\nvar localControls = new Controls_1.Controls(me);\nvar worldContents = [\n    me\n];\nfunction render() {\n    //console.log(\"Rendering\");\n}\nsetInterval(function () { return render(); }, 33);\n\n\n//# sourceURL=webpack://lib/./src/public/client.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Attendee_1 = __webpack_require__(/*! ../browserparty/Attendee */ \"./src/browserparty/Attendee.ts\");\nvar LocationServerConnection_1 = __webpack_require__(/*! ./LocationServerConnection */ \"./src/public/LocationServerConnection.ts\");\nvar Controls_1 = __webpack_require__(/*! ./Controls */ \"./src/public/Controls.ts\");\nvar connection = new LocationServerConnection_1.LocationServerConnection(\"wss://\" + window.location.host);\nvar world = document.getElementById(\"world\");\nvar me = new Attendee_1.Attendee(\"username\", 50, 50);\nvar localControls = new Controls_1.Controls(me);\nvar worldContents = [\n    me\n];\nfunction createVisualEntity(visualId) {\n    var div = document.createElement(\"div\");\n    div.classList.add(\"entity\");\n    div.classList.add(\"entity\");\n}\nfunction render() {\n    for (var item in worldContents) {\n        var visualId = \"entity-\" + item.id;\n        var visualEntity = document.getElementById(visualId);\n        if (visualEntity == null) {\n        }\n    }\n}\nsetInterval(function () { return render(); }, 33);\n\n\n//# sourceURL=webpack://lib/./src/public/client.ts?");
 
 /***/ })
 
