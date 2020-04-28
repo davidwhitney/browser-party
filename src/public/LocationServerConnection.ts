@@ -33,7 +33,7 @@ export class LocationServerConnection {
   }
 
   public sendMovement(entity: Entity, movementDelta: Move) {
-    
+    console.log("send movement");
   }
 
   public sendMessage() {
