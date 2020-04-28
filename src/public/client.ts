@@ -1,40 +1,34 @@
 import { Attendee } from "../browserparty/Attendee";
+import { LocationServerConnection } from "./LocationServerConnection";
 
 const world = document.getElementById("world") as HTMLInputElement;
 const me = new Attendee("username", 50, 50);
 
-const server = "wss://" + window.location.host;
+const connection = new LocationServerConnection("wss://" + window.location.host);
 
 
-class LocationServerConnection {  
-  private ws: WebSocket;
+
+export class Controls {
   
-  constructor(websocketServer)
+  public processInput(keyPressed: any) {
+    const key = keyPressed.key.toLowerCase();
+    const movement = toMove(key);
+    this.game.world.move(movement);
   }
   
   public connect() {
-    this.ws = new WebSocket(websocketServer);
-    this.onopen = function() {
-     console.log("Web socket connected.");   
-    };
-
-    this.onmessage = function (evt) { 
-     const unpacked = JSON.parse(evt.data);
-    };
-
-    this.onclose = function() {
-    };
+    window.addEventListener("keypress", (args) => {
+      this.processInput(args);
+    }, false);    
   }
-
-  
 }
 
-
-const sendMessage = (event) => {
-  const payload = {
-    name: nameTextbox.value,
-    message: messageTextbox.value
-  };
-  
-  ws.send(JSON.stringify(payload));
-};
+const toMove = (key: string): Move => {
+  switch(key) {
+    case "w": return { deltaX: 0, deltaY: -1 };
+    case "a": return { deltaX: -1, deltaY: 0 };
+    case "s": return { deltaX: 0, deltaY: 1 };
+    case "d": return { deltaX: 1, deltaY: 0 };
+    default:  return { deltaX: 0, deltaY: 0 };
+  }    
+}

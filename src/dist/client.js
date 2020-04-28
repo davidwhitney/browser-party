@@ -99,6 +99,18 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar At
 
 /***/ }),
 
+/***/ "./src/public/LocationServerConnection.ts":
+/*!************************************************!*\
+  !*** ./src/public/LocationServerConnection.ts ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar LocationServerConnection = /** @class */ (function () {\n    function LocationServerConnection(websocketServer) {\n        this.serverUrl = websocketServer;\n        this.ws = new WebSocket(this.serverUrl);\n        this.ws.onopen = function () {\n            console.log(\"Web socket connected.\");\n        };\n        this.ws.onmessage = function (evt) {\n            var unpacked = JSON.parse(evt.data);\n        };\n        this.ws.onclose = function () {\n            console.log(\"Closed connection\");\n        };\n    }\n    LocationServerConnection.prototype.sendMessage = function () {\n        var payload = {\n        //name: nameTextbox.value,\n        // message: messageTextbox.value\n        };\n        ws.send(JSON.stringify(payload));\n    };\n    return LocationServerConnection;\n}());\nexports.LocationServerConnection = LocationServerConnection;\n\n\n//# sourceURL=webpack://lib/./src/public/LocationServerConnection.ts?");
+
+/***/ }),
+
 /***/ "./src/public/client.ts":
 /*!******************************!*\
   !*** ./src/public/client.ts ***!
@@ -107,7 +119,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar At
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Attendee_1 = __webpack_require__(/*! ../browserparty/Attendee */ \"./src/browserparty/Attendee.ts\");\nvar world = document.getElementById(\"world\");\nvar me = new Attendee_1.Attendee(\"username\", 50, 50);\nvar server = \"wss://\" + window.location.host;\nvar LocationServerConnection = /** @class */ (function () {\n    function LocationServerConnection() {\n    }\n    return LocationServerConnection;\n}());\nconnect();\n{\n    this.ws = new WebSocket(websocketServer);\n}\nws.onopen = function () {\n    console.log(\"Web socket connected.\");\n};\nws.onmessage = function (evt) {\n    var unpacked = JSON.parse(evt.data);\n};\nws.onclose = function () {\n    for (var _i = 0, chatUi_1 = chatUi; _i < chatUi_1.length; _i++) {\n        var ui = chatUi_1[_i];\n        ui.disabled = true;\n    }\n};\nvar sendMessage = function (event) {\n    var payload = {\n        name: nameTextbox.value,\n        message: messageTextbox.value\n    };\n    ws.send(JSON.stringify(payload));\n};\n\n\n//# sourceURL=webpack://lib/./src/public/client.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Attendee_1 = __webpack_require__(/*! ../browserparty/Attendee */ \"./src/browserparty/Attendee.ts\");\nvar LocationServerConnection_1 = __webpack_require__(/*! ./LocationServerConnection */ \"./src/public/LocationServerConnection.ts\");\nvar world = document.getElementById(\"world\");\nvar me = new Attendee_1.Attendee(\"username\", 50, 50);\nvar connection = new LocationServerConnection_1.LocationServerConnection(\"wss://\" + window.location.host);\nvar Controls = /** @class */ (function () {\n    function Controls() {\n    }\n    Controls.prototype.processInput = function (keyPressed) {\n        var key = keyPressed.key.toLowerCase();\n        var movement = toMove(key);\n        this.game.world.move(movement);\n    };\n    Controls.prototype.connect = function () {\n        var _this = this;\n        window.addEventListener(\"keypress\", function (args) {\n            _this.processInput(args);\n        }, false);\n    };\n    return Controls;\n}());\nexports.Controls = Controls;\nvar toMove = function (key) {\n    switch (key) {\n        case \"w\": return { deltaX: 0, deltaY: -1 };\n        case \"a\": return { deltaX: -1, deltaY: 0 };\n        case \"s\": return { deltaX: 0, deltaY: 1 };\n        case \"d\": return { deltaX: 1, deltaY: 0 };\n        default: return { deltaX: 0, deltaY: 0 };\n    }\n};\n\n\n//# sourceURL=webpack://lib/./src/public/client.ts?");
 
 /***/ })
 
