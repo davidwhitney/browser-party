@@ -1,10 +1,10 @@
 import { Location, Move } from "../types";
 
 export class Controls {
-  public target: Location;
+  public target: Entity;
   public movementSpeed: number;
 
-  constructor(targetOfControl: Location, movementSpeed: number = 5) {
+  constructor(targetOfControl: Entity, movementSpeed: number = 5) {
     this.target = targetOfControl;
     this.movementSpeed = movementSpeed;
   }
@@ -22,9 +22,8 @@ export class Controls {
     };   
     
     const key = keyPressed.key.toLowerCase();
-    const movement = toMove(key);    
-    this.target.x += (movement.deltaX * this.movementSpeed);
-    this.target.y += (movement.deltaY * this.movementSpeed);
+    const movement = toMove(key);
+    this.target.move(movement);
   }
   
   public connect() {

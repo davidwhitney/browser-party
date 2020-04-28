@@ -7,6 +7,7 @@ const connection = new LocationServerConnection("wss://" + window.location.host)
 const world = document.getElementById("world") as HTMLInputElement;
 
 const me = new Attendee("username", 50, 50);
+me.onMovement(connection.sendMovement);
 
 const localControls = new Controls(me);
 localControls.connect();
