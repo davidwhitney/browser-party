@@ -2,9 +2,11 @@ import { Location, Move } from "../types";
 
 export class Controls {
   public target: Location;
+  public movementSpeed: number;
 
-  constructor(targetOfControl: Location) {
+  constructor(targetOfControl: Location, movementSpeed: number = 5) {
     this.target = targetOfControl;
+    this.movementSpeed = movementSpeed;
   }
   
   public processInput(keyPressed: any) {
@@ -21,8 +23,8 @@ export class Controls {
     
     const key = keyPressed.key.toLowerCase();
     const movement = toMove(key);    
-    this.target.x += movement.deltaX;
-    this.target.y += movement.deltaY;
+    this.target.x += (movement.deltaX * this.movementSpeed);
+    this.target.y += (movement.deltaY * this.movementSpeed);
   }
   
   public connect() {
