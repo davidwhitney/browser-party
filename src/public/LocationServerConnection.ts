@@ -7,8 +7,7 @@ class Message {
   
   constructor(senderId: string, body:any) {
     this.sender = senderId;
-    this.body = body;
-    
+    this.body = body;    
   }
 }
 
@@ -32,16 +31,13 @@ export class LocationServerConnection {
     };    
   }
 
-  public sendMovement(entity: Entity, movementDelta: Move) {
-    console.log("send movement");
+  public sendMovement(entity: Entity, move: Move) {
+    console.log("Sending movement");
+    const msg = new Message(entity.id, { move });
+    this.sendMessage(msg);
   }
 
-  public sendMessage() {
-    const payload = {
-      //name: nameTextbox.value,
-     // message: messageTextbox.value
-    };
-
+  private sendMessage(payload) {
     this.ws.send(JSON.stringify(payload));
   }
 }

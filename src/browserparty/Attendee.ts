@@ -13,11 +13,13 @@ export class Attendee implements Entity {
     this.x = x;
     this.y = y;
     this.movementSpeed = 5;
+    this.onMovementCallback = function(entity, msg) { };
   }
 
   public move(movement: Move) {        
     this.x += (movement.deltaX * this.movementSpeed);
     this.y += (movement.deltaY * this.movementSpeed);
+    this.onMovementCallback(this, movement);
   }
 
   public onMovement(callback) {

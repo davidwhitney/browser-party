@@ -13,22 +13,19 @@ export class Controls {
     
     const toMove = (key: string): Move => {
       switch(key) {
-        case "w": return { deltaX: 0, deltaY: -1 };
-        case "a": return { deltaX: -1, deltaY: 0 };
-        case "s": return { deltaX: 0, deltaY: 1 };
-        case "d": return { deltaX: 1, deltaY: 0 };
+        case "ArrowUp": return { deltaX: 0, deltaY: -1 };
+        case "ArrowLeft": return { deltaX: -1, deltaY: 0 };
+        case "ArrowDown": return { deltaX: 0, deltaY: 1 };
+        case "ArrowRight": return { deltaX: 1, deltaY: 0 };
         default:  return { deltaX: 0, deltaY: 0 };
       }    
     };   
     
-    c    console.log(keyPressed);
-    const key = keyPressed.key.toLowerCase();
-    const movement = toMove(key);
-    this.target.move(movement);
+    this.target.move(toMove(keyPressed.key));
   }
   
   public connect() {
-    window.addEventListener("onkeydown", (args) => {
+    window.addEventListener("keydown", (args) => {
       this.processInput(args);
     }, false);    
   }
