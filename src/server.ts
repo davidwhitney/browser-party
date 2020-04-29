@@ -49,7 +49,7 @@ const messageHandlers = {
 
 let heartbeatTimer: any;
 wss.on('connection', (ws: WebSocket) => {  
-    heartbeatTimer = setInterval(heartbeat, 1000);
+    heartbeatTimer = setInterval(heartbeat, 500);
 
     ws.on('message', (message: string) => {   
       const msg = JSON.parse(message) as any;
