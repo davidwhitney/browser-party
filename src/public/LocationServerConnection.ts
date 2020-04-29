@@ -1,13 +1,13 @@
 import { Location, Move, Entity } from "../types";
 
-class Message<TMessage> {
+class Message {
   
   public sender: string;
-  public body: TMessage;
+  public body: any;
   
-  constructor(senderId: string, body: TMessage) {
+  constructor(senderId: string, body:any) {
     this.sender = senderId;
-    this.body = body
+    this.body = body;
     
   }
 }

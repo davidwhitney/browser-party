@@ -21,13 +21,14 @@ export class Controls {
       }    
     };   
     
+    c    console.log(keyPressed);
     const key = keyPressed.key.toLowerCase();
     const movement = toMove(key);
     this.target.move(movement);
   }
   
   public connect() {
-    window.addEventListener("keypress", (args) => {
+    window.addEventListener("onkeydown", (args) => {
       this.processInput(args);
     }, false);    
   }
