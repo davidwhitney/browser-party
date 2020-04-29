@@ -1,4 +1,5 @@
 import { Attendee } from "../browserparty/Attendee";
+import { RoomState } from "../browserparty/messages";
 import { LocationServerConnection } from "./LocationServerConnection";
 import { Controls } from "./Controls";
 import { render } from "./render";
@@ -18,14 +19,20 @@ const connectButton = document.getElementById("connect") as HTMLButtonElement;
 usernameBox.value = uuidv4();
 
 const connection = new LocationServerConnection("wss://" + window.location.host); 
-connection.onMessageReceived((message) => {    
-  const knownEntity = worldContents.filter(item => item.id == message.sender.id).length > 0;
-  if (!knownEntity) {
-    worldContents.push(message.sender);  
-  }
-  const worldEntity = worldContents.filter(item => item.id == message.sender.id)[0];
-  worldEntity.x = message.sender.x;
-  worldEntity.y = message.sender.y;    
+connection.onMessageReceived((message: RoomState) => {
+  
+  console.log(message);
+  for (let serverEntity of message.contents) {
+    
+      const clientEntityExists = worldContents.filter(item => item.id == serverEntity.id).length > 0;
+      if (!clientEntityExists) {
+        worldContents.push(serverEntity);  
+      }
+      const clientEntity = worldContents.filter(item => item.id == serverEntity.id)[0];
+      clientEntity.x = serverEntity.x;
+      clientEntity.y = serverEntity.y;
+  }  
+   
 });
 
 let worldContents: IDrawable[] = [];

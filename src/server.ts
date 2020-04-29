@@ -1,4 +1,4 @@
-import { Message, MessageBody, Join, Movement } from "./browserparty/messages";
+import { Message, MessageBody, Join, Movement, RoomState } from "./browserparty/messages";
 import { Attendee } from "./browserparty/Attendee";
 import { Entity } from "./types";
 
@@ -37,7 +37,8 @@ function movement(sender: any, msg: Message<Movement>) {
 
 function heartbeat() {
   const room = rooms["room1"];
-  const asString = JSON.stringify(room);
+  const stateMessage = new RoomState(room);
+  const asString = JSON.stringify(stateMessage);
   wss.clients.forEach(client => {
     client.send(asString);
   });

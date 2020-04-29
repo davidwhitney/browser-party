@@ -14,6 +14,13 @@ export interface Join extends MessageBody {
   join: boolean
 }
 
+export class RoomState {
+  public contents: Entity[];
+  constructor(contents: Entity[]) {
+    this.contents = contents;
+  }
+}
+
 export class Message<T> {
   
   public sender: Entity;
