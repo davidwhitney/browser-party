@@ -1,45 +1,31 @@
 import { Attendee } from "../browserparty/Attendee";
 import { LocationServerConnection } from "./LocationServerConnection";
 import { Controls } from "./Controls";
+import { render } from "./render";
 import { Entity } from "../types";
 
-const worldContents: Entity[] = [];
+const fps = 30;
 const world = document.getElementById("world") as HTMLInputElement;
-const connection = new LocationServerConnection("wss://" + window.location.host);
+const usernameBox = document.getElementById("username") as HTMLInputElement;
+const connectButton = document.getElementById("connect") as HTMLButtonElement;
 
-connection.onMessageReceived((message) => {
-  
-});
+let worldContents: Entity[];
+let connection: LocationServerConnection;
+let me: Attendee;
 
+function join() {
+  worldContents = [];
+  connection = new LocationServerConnection("wss://" + window.location.host);
+  connection.onMessageReceived((message) => {
 
-const me = new Attendee("username", "room1", 50, 50);
-me.onMovement((entity, move) => connection.sendMovement(entity, move));
-worldContents.push(me);
+  });
 
-new Controls(me).connect();
+  const me = new Attendee(usernameBox.value, "room1", 50, 50);
+  me.onMovement((entity, move) => connection.sendMovement(entity, move));
+  worldContents.push(me);
 
-
-
-function createVisualEntity(item: Entity, visualId: string) {
-  var div = document.createElement("div");
-  div.id = visualId;
-  div.classList.add("entity");
-  div.classList.add(item.constructor.name);
-  world.appendChild(div);
-  return div;
+  new Controls(me).connect();
 }
 
-function render() {
-  
-  for (let item of worldContents) {
-    const visualId = `entity-${item.id}`;
-    let visualEntity = document.getElementById(visualId);
-    visualEntity = visualEntity == null ? createVisualEntity(item, visualId) : visualEntity;
-    
-    visualEntity.style.left = item.x + "px";
-    visualEntity.style.top = item.y + "px";
-  }
-  
-}
-
-setInterval(() => render(), 33);
+connectButton.addEventListeber("click", () => { join(); });
+setInterval(() => render(), (1000 / fps));
