@@ -1,4 +1,4 @@
-import { Message, Join, Movement } from "./browserparty/messages";
+import { Message, MessageBody, Join, Movement } from "./browserparty/messages";
 
 const express = require("express");
 const path = require("path");
@@ -24,12 +24,13 @@ const rooms = {
 wss.on('connection', (ws: WebSocket) => {
     ws.on('message', (message: string) => {
         
-        const asObj = JSON.parse(message) as any as Message;
-      
+        const asObj = JSON.parse(message) as any as Message<MessageBody>;
+        console.log(asObj);
+        
         wss.clients.forEach(client => {
           
           if (client == ws) {
-            // console.log("this is the sender!");
+             // console.log("this is the sender!");
           } else {
             client.send(message);
           }

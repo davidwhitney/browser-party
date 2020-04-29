@@ -1,10 +1,14 @@
 import { Location, Move, Entity } from "../types";
 
-export interface Movement {
+export interface MessageBody { }
+
+export interface Movement extends MessageBody {
+  type: 'movement';
   move: Move
 }
 
 export interface Join extends MessageBody {
+  type: 'join';
   join: boolean
 }
 
