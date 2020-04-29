@@ -47,7 +47,7 @@ export class LocationServerConnection {
 
 
   public sendMovement(entity: Entity, move: Move) {
-    this.sendMessage(new Message<Movement>(entity, { type: 'movement', move }));
+    this.sendMessage(new Message<Movement>(entity, { type: 'movement' }));
   }
 
   private sendMessage(payload) {

@@ -6,7 +6,6 @@ export interface MessageBody {
 
 export interface Movement extends MessageBody {
   type: 'movement';
-  move: Move
 }
 
 export interface Join extends MessageBody {

@@ -23,16 +23,14 @@ const contents: Entity[] = [];
 const rooms = { "room1": contents };
 
 function join(sender: any, msg: Message<Join>) {
-  console.log(msg);
   rooms["room1"].push(msg.sender);
 }
 
 function movement(sender: any, msg: Message<Movement>) {  
-  console.log(msg);
   const room = rooms[msg.sender.roomId];
   const serverEntity = room.filter(e => e.id === msg.sender.id)[0] as Attendee;
-  serverEntity.x += msg.body.move.deltaX;
-  serverEntity.y += msg.body.move.deltaY;
+  serverEntity.x = msg.sender.x;
+  serverEntity.y = msg.sender.y;
 }
 
 function heartbeat() {  
