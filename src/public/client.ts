@@ -26,6 +26,14 @@ function join() {
   connection = new LocationServerConnection("wss://" + window.location.host);
   connection.onMessageReceived((message) => {
     console.log("Got a message.");
+    const knownEntity = worldContents.filter(item => item.id == message.sender.id).length > 0;
+    if (!knownEntity) {
+      worldContents.push(message.sender);  
+    }
+    const worldEntity = worldContents.filter(item => item.id == message.sender.id);
+    worldEntity.x = message.sender.x;
+    worldEntity.y = message.sender.y;
+    
   });
 
   const me = new Attendee(usernameBox.value, "room1", 50, 50);

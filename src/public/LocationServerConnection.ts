@@ -1,6 +1,6 @@
 import { Location, Move, Entity } from "../types";
 
-class Message {
+export class Message {
   
   public sender: Entity;
   public body: any;
