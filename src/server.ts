@@ -1,3 +1,5 @@
+import { Message, Join, Movement } from "./browserparty/messages";
+
 const express = require("express");
 const path = require("path");
 import * as WebSocket from 'ws';
@@ -22,6 +24,8 @@ const rooms = {
 wss.on('connection', (ws: WebSocket) => {
     ws.on('message', (message: string) => {
         
+        const asObj = JSON.parse(message) as any as Message;
+      
         wss.clients.forEach(client => {
           
           if (client == ws) {

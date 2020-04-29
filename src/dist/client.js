@@ -99,6 +99,18 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar At
 
 /***/ }),
 
+/***/ "./src/browserparty/messages.ts":
+/*!**************************************!*\
+  !*** ./src/browserparty/messages.ts ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Message = /** @class */ (function () {\n    function Message(sender, body) {\n        this.sender = sender;\n        this.body = body;\n    }\n    return Message;\n}());\nexports.Message = Message;\n\n\n//# sourceURL=webpack://lib/./src/browserparty/messages.ts?");
+
+/***/ }),
+
 /***/ "./src/public/Controls.ts":
 /*!********************************!*\
   !*** ./src/public/Controls.ts ***!
@@ -119,7 +131,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Co
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Message = /** @class */ (function () {\n    function Message(sender, body) {\n        this.sender = sender;\n        this.body = body;\n    }\n    return Message;\n}());\nexports.Message = Message;\nvar LocationServerConnection = /** @class */ (function () {\n    function LocationServerConnection(websocketServer) {\n        var _this = this;\n        this.serverUrl = websocketServer;\n        this.ws = new WebSocket(this.serverUrl);\n        this.onMessageReceivedCallback = function (message) { };\n        this.ws.onopen = function () {\n            console.log(\"Web socket connected.\");\n        };\n        this.ws.onmessage = function (evt) {\n            var unpacked = JSON.parse(evt.data);\n            _this.onMessageReceivedCallback(unpacked);\n        };\n        this.ws.onclose = function () {\n            console.log(\"Closed connection\");\n        };\n    }\n    LocationServerConnection.prototype.onMessageReceived = function (callback) {\n        this.onMessageReceivedCallback = callback;\n    };\n    LocationServerConnection.prototype.join = function (entity, move) {\n        var msg = new Message(entity, { join: true });\n        this.sendMessage(new Message(entity, { join: true }));\n    };\n    LocationServerConnection.prototype.sendMovement = function (entity, move) {\n        console.log(\"Sending movement\");\n        var msg = new Message(entity, { move: move });\n        this.sendMessage(msg);\n    };\n    LocationServerConnection.prototype.sendMessage = function (payload) {\n        this.ws.send(JSON.stringify(payload));\n    };\n    return LocationServerConnection;\n}());\nexports.LocationServerConnection = LocationServerConnection;\n\n\n//# sourceURL=webpack://lib/./src/public/LocationServerConnection.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar messages_1 = __webpack_require__(/*! ../browserparty/messages */ \"./src/browserparty/messages.ts\");\n/*\nexport class Message {\n  \n  public sender: Entity;\n  public body: any;\n  \n  constructor(sender: Entity, body:any) {\n    this.sender = sender;\n    this.body = body;\n  }\n}*/\nvar LocationServerConnection = /** @class */ (function () {\n    function LocationServerConnection(websocketServer) {\n        var _this = this;\n        this.serverUrl = websocketServer;\n        this.ws = new WebSocket(this.serverUrl);\n        this.onMessageReceivedCallback = function (message) { };\n        this.ws.onopen = function () {\n            console.log(\"Web socket connected.\");\n        };\n        this.ws.onmessage = function (evt) {\n            var unpacked = JSON.parse(evt.data);\n            _this.onMessageReceivedCallback(unpacked);\n        };\n        this.ws.onclose = function () {\n            console.log(\"Closed connection\");\n        };\n    }\n    LocationServerConnection.prototype.onMessageReceived = function (callback) {\n        this.onMessageReceivedCallback = callback;\n    };\n    LocationServerConnection.prototype.join = function (entity, move) {\n        this.sendMessage(new messages_1.Message(entity, { join: true }));\n    };\n    LocationServerConnection.prototype.sendMovement = function (entity, move) {\n        this.sendMessage(new messages_1.Message(entity, { move: move }));\n    };\n    LocationServerConnection.prototype.sendMessage = function (payload) {\n        this.ws.send(JSON.stringify(payload));\n    };\n    return LocationServerConnection;\n}());\nexports.LocationServerConnection = LocationServerConnection;\n\n\n//# sourceURL=webpack://lib/./src/public/LocationServerConnection.ts?");
 
 /***/ }),
 

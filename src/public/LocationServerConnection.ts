@@ -1,5 +1,7 @@
+import { Message, Join, Movement } from "../browserparty/messages";
 import { Location, Move, Entity } from "../types";
 
+/*
 export class Message {
   
   public sender: Entity;
@@ -9,7 +11,7 @@ export class Message {
     this.sender = sender;
     this.body = body;    
   }
-}
+}*/
 
 export class LocationServerConnection {  
   private serverUrl: string;
@@ -40,13 +42,12 @@ export class LocationServerConnection {
   }  
 
   public join(entity: Entity, move: Move) {
-    this.sendMessage(new Message(entity, { join: true }));
+    this.sendMessage(new Message<Join>(entity, { join: true }));
   }
 
 
   public sendMovement(entity: Entity, move: Move) {
-    console.log("Sending movement");
-    this.sendMessage(new Message(entity, { move }));
+    this.sendMessage(new Message<Movement>(entity, { move }));
   }
 
   private sendMessage(payload) {
