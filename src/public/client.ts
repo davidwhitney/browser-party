@@ -12,6 +12,8 @@ function uuidv4() {
   });
 }
 
+let worldContents: IDrawable[] = [];
+let me: Attendee;
 
 const fps = 30;
 const usernameBox = document.getElementById("username") as HTMLInputElement;
@@ -21,8 +23,9 @@ usernameBox.value = uuidv4();
 const connection = new LocationServerConnection("wss://" + window.location.host); 
 connection.onMessageReceived((message: RoomState) => {
   
-  console.log(message);
   for (let serverEntity of message.contents) {
+    
+      if (me && serverEntity.id == me.id) continue;
     
       const clientEntityExists = worldContents.filter(item => item.id == serverEntity.id).length > 0;
       if (!clientEntityExists) {
@@ -35,8 +38,6 @@ connection.onMessageReceived((message: RoomState) => {
    
 });
 
-let worldContents: IDrawable[] = [];
-let me: Attendee;
 
 function join() {
   worldContents = [];

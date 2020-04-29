@@ -35,7 +35,7 @@ function movement(sender: any, msg: Message<Movement>) {
   serverEntity.y += msg.body.move.deltaY;
 }
 
-function heartbeat() {
+function heartbeat() {  
   const room = rooms["room1"];
   const stateMessage = new RoomState(room);
   const asString = JSON.stringify(stateMessage);
@@ -51,7 +51,7 @@ const messageHandlers = {
 
 let heartbeatTimer: any;
 wss.on('connection', (ws: WebSocket) => {  
-    heartbeatTimer = setInterval(heartbeat, 500);
+    heartbeatTimer = setInterval(heartbeat, 1000);
 
     ws.on('message', (message: string) => {   
       const msg = JSON.parse(message) as any;
