@@ -24,8 +24,12 @@ const rooms = {
 wss.on('connection', (ws: WebSocket) => {
     ws.on('message', (message: string) => {
         
-        const asObj = JSON.parse(message) as any as Message<MessageBody>;
-        console.log(asObj);
+        console.log(message);
+        const msg = JSON.parse(message) as any as Message<MessageBody>;
+      
+        if(msg.body.type == 'join') {
+          console.log("join msg");
+        }
         
         wss.clients.forEach(client => {
           

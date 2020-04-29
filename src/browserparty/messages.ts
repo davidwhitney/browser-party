@@ -1,6 +1,8 @@
 import { Location, Move, Entity } from "../types";
 
-export interface MessageBody { }
+export interface MessageBody { 
+  type: string;
+}
 
 export interface Movement extends MessageBody {
   type: 'movement';

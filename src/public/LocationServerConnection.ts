@@ -41,13 +41,13 @@ export class LocationServerConnection {
     this.onMessageReceivedCallback = callback;
   }  
 
-  public join(entity: Entity, move: Move) {
-    this.sendMessage(new Message<Join>(entity, { join: true }));
+  public join(entity: Entity) {
+    this.sendMessage(new Message<Join>(entity, { type: 'join', join: true }));
   }
 
 
   public sendMovement(entity: Entity, move: Move) {
-    this.sendMessage(new Message<Movement>(entity, { move }));
+    this.sendMessage(new Message<Movement>(entity, { type: 'movement', move }));
   }
 
   private sendMessage(payload) {

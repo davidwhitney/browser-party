@@ -2,7 +2,7 @@ import { Attendee } from "../browserparty/Attendee";
 import { LocationServerConnection } from "./LocationServerConnection";
 import { Controls } from "./Controls";
 import { render } from "./render";
-import { Entity } from "../types";
+import { Entity, IDrawable } from "../types";
 
 function uuidv4() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -17,15 +17,15 @@ const usernameBox = document.getElementById("username") as HTMLInputElement;
 const connectButton = document.getElementById("connect") as HTMLButtonElement;
 usernameBox.value = uuidv4();
 
-let worldContents: Entity[] = [];
+let worldContents: IDrawable[] = [];
 let connection: LocationServerConnection;
 let me: Attendee;
 
 function join() {
   worldContents = [];
-  connection = new LocationServerConnection("wss://" + window.location.host);
+  connection = new LocationServerConnection("wss://" + window.location.host);  
   connection.onMessageReceived((message) => {
-    console.log("Got a message.");
+    
     const knownEntity = worldContents.filter(item => item.id == message.sender.id).length > 0;
     if (!knownEntity) {
       worldContents.push(message.sender);  
@@ -38,8 +38,8 @@ function join() {
 
   const me = new Attendee(usernameBox.value, "room1", 50, 50);
   me.onMovement((entity, move) => connection.sendMovement(entity, move));
+  
   worldContents.push(me);
-
   new Controls(me).connect();
 }
 
