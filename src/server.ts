@@ -1,5 +1,6 @@
 import { Message, MessageBody, Join, Movement } from "./browserparty/messages";
 import { Attendee } from "./browserparty/Attendee";
+import { Entity } from "./types";
 
 const express = require("express");
 const path = require("path");
@@ -18,19 +19,28 @@ app.get("/", (request, response)  => {
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
-const rooms = {
-  "room1": []
-};
+const contents: Entity[] = [];
+const rooms = { "room1": contents };
 
-function join(msg: Message<Join>) {
-  console.log("join msg");  
+function join(sender: any, msg: Message<Join>) {
+  console.log(msg);
+  rooms["room1"].push(msg.sender);
 }
 
-function movement(msg: Message<Movement>) {  
+function movement(sender: any, msg: Message<Movement>) {  
+  console.log(msg);
   const room = rooms[msg.sender.roomId];
   const serverEntity = room.filter(e => e.id === msg.sender.id)[0] as Attendee;
   serverEntity.x += msg.body.move.deltaX;
   serverEntity.y += msg.body.move.deltaY;
+}
+
+function heartbeat() {
+  const room = rooms["room1"];
+  const asString = JSON.stringify(room);
+  wss.clients.forEach(client => {
+    client.send(asString);
+  });
 }
 
 const messageHandlers = {
@@ -38,24 +48,13 @@ const messageHandlers = {
   "movement": movement
 };
 
-wss.on('connection', (ws: WebSocket) => {
-    ws.on('message', (message: string) => {        
-      
-      const sender = ws;
+let heartbeatTimer: any;
+wss.on('connection', (ws: WebSocket) => {  
+    heartbeatTimer = setInterval(heartbeat, 500);
+
+    ws.on('message', (message: string) => {   
       const msg = JSON.parse(message) as any;
-      messageHandlers[msg.body.type](msg);
-        
-      
-        wss.clients.forEach(client => {
-          
-          if (client == ws) {
-             // console.log("this is the sender!");
-          } else {
-            client.send(message);
-          }
-          
-        });
-      
+      messageHandlers[msg.body.type](ws, msg);
     });
 });
 
