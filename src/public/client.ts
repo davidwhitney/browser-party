@@ -5,11 +5,10 @@ import { render } from "./render";
 import { Entity } from "../types";
 
 const fps = 30;
-const world = document.getElementById("world") as HTMLInputElement;
 const usernameBox = document.getElementById("username") as HTMLInputElement;
 const connectButton = document.getElementById("connect") as HTMLButtonElement;
 
-let worldContents: Entity[];
+let worldContents: Entity[] = [];
 let connection: LocationServerConnection;
 let me: Attendee;
 
@@ -28,4 +27,4 @@ function join() {
 }
 
 connectButton.addEventListener("click", () => { join(); });
-setInterval(() => render(), (1000 / fps));
+setInterval(() => render(worldContents), (1000 / fps));

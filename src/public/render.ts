@@ -1,6 +1,8 @@
 import { Attendee } from "../browserparty/Attendee";
 import { Entity } from "../types";
 
+const world = document.getElementById("world") as HTMLInputElement;
+
 function createVisualEntity(item: Entity, visualId: string) {
   var div = document.createElement("div");
   div.id = visualId;
@@ -10,7 +12,7 @@ function createVisualEntity(item: Entity, visualId: string) {
   return div;
 }
 
-export function render() {
+export function render(worldContents: Entity[]) {
   
   for (let item of worldContents) {
     const visualId = `entity-${item.id}`;
