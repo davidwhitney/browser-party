@@ -6,8 +6,8 @@ import { Entity } from "../types";
 const connection = new LocationServerConnection("wss://" + window.location.host);
 const world = document.getElementById("world") as HTMLInputElement;
 
-const me = new Attendee("username", 50, 50);
-me.onMovement(connection.sendMovement);
+const me = new Attendee("username", "room1", 50, 50);
+me.onMovement((entity, move) => connection.sendMovement(entity, move));
 
 const localControls = new Controls(me);
 localControls.connect();

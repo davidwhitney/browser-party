@@ -3,12 +3,13 @@ import { Entity, Move } from "../types";
 export class Attendee implements Entity {
   
   public id: string;
+  public roomId: string;
   public x: number;
   public y: number;
   public movementSpeed: number;  
   public onMovementCallback: any;
     
-  constructor(id: string, x: number, y: number) {
+  constructor(id: string, roomId, string, x: number, y: number) {
     this.id = id;
     this.x = x;
     this.y = y;

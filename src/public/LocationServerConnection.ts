@@ -2,11 +2,11 @@ import { Location, Move, Entity } from "../types";
 
 class Message {
   
-  public sender: string;
+  public sender: Entity;
   public body: any;
   
-  constructor(senderId: string, body:any) {
-    this.sender = senderId;
+  constructor(sender: Entity, body:any) {
+    this.sender = sender;
     this.body = body;    
   }
 }
@@ -33,7 +33,7 @@ export class LocationServerConnection {
 
   public sendMovement(entity: Entity, move: Move) {
     console.log("Sending movement");
-    const msg = new Message(entity.id, { move });
+    const msg = new Message(entity, { move });
     this.sendMessage(msg);
   }
 
