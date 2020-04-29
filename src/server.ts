@@ -17,14 +17,17 @@ const wss = new WebSocket.Server({ server });
 
 wss.on('connection', (ws: WebSocket) => {
     ws.on('message', (message: string) => {
+        
         wss.clients.forEach(client => {
           
           if (client == ws) {
-            console.log("this is the sender!");
+            // console.log("this is the sender!");
+          } else {
+            client.send(message);
           }
           
-          client.send(message);
-        });      
+        });
+      
     });
 });
 
