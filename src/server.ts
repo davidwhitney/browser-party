@@ -21,7 +21,7 @@ const rooms = {
   "room1": []
 };
 
-function join()msg: Message<Join> {
+function join(msg: Message<Join>) {
   console.log("join msg");  
 }
 
@@ -31,7 +31,7 @@ function movement(msg: Message<Movement>) {
 }
 
 const messageHandlers = {
-  "join": join
+  "join": join,
   "movement": movement
 };
 
