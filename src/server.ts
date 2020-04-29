@@ -21,15 +21,24 @@ const rooms = {
   "room1": []
 };
 
+function join()msg: Message<Join> {
+  console.log("join msg");  
+}
+
+function movement(msg: Message<Movement>) {
+  console.log("movement msg");
+
+}
+
+const messageHandlers = {
+  "join": join
+  "movement": movement
+};
+
 wss.on('connection', (ws: WebSocket) => {
-    ws.on('message', (message: string) => {
-        
-        console.log(message);
-        const msg = JSON.parse(message) as any as Message<MessageBody>;
-      
-        if(msg.body.type == 'join') {
-          console.log("join msg");
-        }
+    ws.on('message', (message: string) => {        
+        const msg = JSON.parse(message) as any;
+        messageHandlers[msg.body.type](msg);
         
         wss.clients.forEach(client => {
           
