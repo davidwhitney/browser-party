@@ -1,4 +1,5 @@
 export interface Entity extends IDrawable {
+  roomId: string,
   move(delta: Move): void
 }
 

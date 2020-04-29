@@ -1,4 +1,5 @@
 import { Message, MessageBody, Join, Movement } from "./browserparty/messages";
+import { Attendee } from "./browserparty/Attendee";
 
 const express = require("express");
 const path = require("path");
@@ -25,9 +26,11 @@ function join(msg: Message<Join>) {
   console.log("join msg");  
 }
 
-function movement(msg: Message<Movement>) {
-  console.log("movement msg");
-
+function movement(msg: Message<Movement>) {  
+  const room = rooms[msg.sender.roomId];
+  const serverEntity = room.filter(e => e.id === msg.sender.id)[0] as Attendee;
+  serverEntity.x += msg.body.move.deltaX;
+  serverEntity.y += msg.body.move.deltaY;
 }
 
 const messageHandlers = {
@@ -37,9 +40,12 @@ const messageHandlers = {
 
 wss.on('connection', (ws: WebSocket) => {
     ws.on('message', (message: string) => {        
-        const msg = JSON.parse(message) as any;
-        messageHandlers[msg.body.type](msg);
+      
+      const sender = ws;
+      const msg = JSON.parse(message) as any;
+      messageHandlers[msg.body.type](msg);
         
+      
         wss.clients.forEach(client => {
           
           if (client == ws) {
