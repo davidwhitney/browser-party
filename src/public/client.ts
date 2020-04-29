@@ -3,19 +3,21 @@ import { LocationServerConnection } from "./LocationServerConnection";
 import { Controls } from "./Controls";
 import { Entity } from "../types";
 
-const connection = new LocationServerConnection("wss://" + window.location.host);
+const worldContents: Entity[] = [];
 const world = document.getElementById("world") as HTMLInputElement;
+const connection = new LocationServerConnection("wss://" + window.location.host);
+
+connection.onMessageReceived((message) => {
+  
+});
+
 
 const me = new Attendee("username", "room1", 50, 50);
 me.onMovement((entity, move) => connection.sendMovement(entity, move));
+worldContents.push(me);
 
-const localControls = new Controls(me);
-localControls.connect();
+new Controls(me).connect();
 
-
-const worldContents: Entity[] = [
-  me
-];
 
 
 function createVisualEntity(item: Entity, visualId: string) {

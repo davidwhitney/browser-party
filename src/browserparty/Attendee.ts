@@ -9,8 +9,9 @@ export class Attendee implements Entity {
   public movementSpeed: number;  
   public onMovementCallback: any;
     
-  constructor(id: string, roomId, string, x: number, y: number) {
+  constructor(id: string, roomId: string, x: number, y: number) {
     this.id = id;
+    this.roomId = roomId;
     this.x = x;
     this.y = y;
     this.movementSpeed = 5;
