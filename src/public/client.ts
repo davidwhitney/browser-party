@@ -27,5 +27,5 @@ function join() {
   new Controls(me).connect();
 }
 
-connectButton.addEventListeber("click", () => { join(); });
+connectButton.addEventListener("click", () => { join(); });
 setInterval(() => render(), (1000 / fps));
