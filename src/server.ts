@@ -15,6 +15,10 @@ app.get("/", (request, response)  => {
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
+const rooms = {
+  "room1": []
+};
+
 wss.on('connection', (ws: WebSocket) => {
     ws.on('message', (message: string) => {
         

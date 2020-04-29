@@ -30,7 +30,7 @@ function join() {
     if (!knownEntity) {
       worldContents.push(message.sender);  
     }
-    const worldEntity = worldContents.filter(item => item.id == message.sender.id);
+    const worldEntity = worldContents.filter(item => item.id == message.sender.id)[0];
     worldEntity.x = message.sender.x;
     worldEntity.y = message.sender.y;
     

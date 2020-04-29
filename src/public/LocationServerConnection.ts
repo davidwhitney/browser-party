@@ -37,12 +37,16 @@ export class LocationServerConnection {
 
   public onMessageReceived(callback) {
     this.onMessageReceivedCallback = callback;
+  }  
+
+  public join(entity: Entity, move: Move) {
+    this.sendMessage(new Message(entity, { join: true }));
   }
+
 
   public sendMovement(entity: Entity, move: Move) {
     console.log("Sending movement");
-    const msg = new Message(entity, { move });
-    this.sendMessage(msg);
+    this.sendMessage(new Message(entity, { move }));
   }
 
   private sendMessage(payload) {
