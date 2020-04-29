@@ -19,11 +19,13 @@ app.get("/", (request, response)  => {
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
+const entitySockets = {};
 const contents: Entity[] = [];
 const rooms = { "room1": contents };
 
-function join(sender: any, msg: Message<Join>) {
+function join(ws: any, msg: Message<Join>) {
   rooms["room1"].push(msg.sender);
+  entitySockets[msg.sender.id] = ws;
 }
 
 function movement(sender: any, msg: Message<Movement>) {  
@@ -31,6 +33,9 @@ function movement(sender: any, msg: Message<Movement>) {
   const serverEntity = room.filter(e => e.id === msg.sender.id)[0] as Attendee;
   serverEntity.x = msg.sender.x;
   serverEntity.y = msg.sender.y;
+  
+  // Check who you're near.
+  
 }
 
 function heartbeat() {  
